@@ -13,7 +13,7 @@ struct Article {
     var title: String?
     var desc: String?
     var image: String?
-    var createdDate : Date?
+    var createdDate : String?
 }
 
 extension Article: Mappable {
@@ -36,10 +36,11 @@ extension Article: Mappable {
                     "IMAGE": self.image!,
                     "CREATED_DATE" : self.createdDate!,
                     ] as [String : Any]
-        
+
         return data
     }
 }
+
 
 
 

@@ -8,9 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITabBarDelegate, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtocol,  UITableViewDataSource, UITableViewDelegate  {
+ 
 
+    var articlePresentor : ArticlePresenter?
     
+    var articles : [Article]?
     @IBOutlet weak var tableView: UITableView!
     var anotherRedRetangar : UILabel!
     
@@ -24,6 +27,7 @@ class ViewController: UIViewController, UITabBarDelegate, UITableViewDataSource,
     @IBOutlet weak var categoryTabBar: UITabBarItem!
     
     @IBOutlet weak var sourceTabBar: UITabBarItem!
+    var currentArticle : Article?
     
     
     var currunTab : String!
@@ -49,9 +53,7 @@ class ViewController: UIViewController, UITabBarDelegate, UITableViewDataSource,
         let appearance = UITabBarItem.appearance()
         let attributes = [NSAttributedStringKey.font:UIFont(name: "System Font", size: 17)]
         appearance.setTitleTextAttributes(attributes, for: .normal)
-        tableView.delegate = self
-        tableView.dataSource = self
-
+      
 
      
         currunTab = "Home"
@@ -61,22 +63,41 @@ class ViewController: UIViewController, UITabBarDelegate, UITableViewDataSource,
         let nib2 = UINib(nibName: "CategoryTableViewCell", bundle: nil)
         tableView.register(nib2, forCellReuseIdentifier: "categorycell")
         
-         }
-    
+        articles = [Article]()
+        self.articlePresentor = ArticlePresenter()
+        self.articlePresentor?.delegate = self
+        self.articlePresentor?.getArticles(page: 1, limit: 15)
+       
+        tableView.delegate = self
+        tableView.dataSource = self
 
-    override func viewDidAppear(_ animated: Bool) {
     
+    }
+    
+    
+    func didResponseArticle(article: [Article]) {
+        self.articles = article
+        self.tableView.reloadData()
+        print(article.count)
+    }
+    
+    func didResponseMsg(msg: String) {
+        print("Hello API \(msg) ")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
      cofigureTabBar()
       
-       
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        currentArticle = articles![indexPath.row - 1 ]
         performSegue(withIdentifier: "articledetailseque", sender: self)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        print(articles!.count)
+        return (articles?.count)! + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -89,6 +110,8 @@ class ViewController: UIViewController, UITabBarDelegate, UITableViewDataSource,
             }
             else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "homecell") as! HomeCell
+                print(articles![indexPath.row - 1])
+                cell.configureCell(article: articles![indexPath.row - 1])
                 return cell
             }
             
@@ -102,6 +125,10 @@ class ViewController: UIViewController, UITabBarDelegate, UITableViewDataSource,
     }
 
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let controller = segue.destination as! DetailViewController
+        controller.article = currentArticle
+    }
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         print("hello")

@@ -93,10 +93,11 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="dateImage" destination="hyo-1w-80B" id="iYd-de-fTz"/>
+                <outlet property="dateText" destination="875-h9-oJz" id="Heb-f8-94q"/>
                 <outlet property="headline" destination="Frd-hf-hb3" id="qxZ-xO-y5Q"/>
                 <outlet property="thumnail" destination="PMl-w9-dCp" id="kqY-DO-vFY"/>
                 <outlet property="viewImage" destination="rW3-iF-JQI" id="tC1-pT-JTl"/>
-                <outlet property="viewText" destination="875-h9-oJz" id="D2m-Yw-Xa4"/>
+                <outlet property="viewText" destination="AEl-9x-ng7" id="28R-rn-TXs"/>
             </connections>
             <point key="canvasLocation" x="-59.5" y="91.5"/>
         </tableViewCell>

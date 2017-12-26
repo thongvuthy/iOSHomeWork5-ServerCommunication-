@@ -19,6 +19,10 @@
 		8E78D3111FEF5FD800427BD0 /* HomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E78D30F1FEF5FD800427BD0 /* HomeCell.xib */; };
 		8E78D3191FEFCFE100427BD0 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E78D3181FEFCFE100427BD0 /* CategoryTableViewCell.swift */; };
 		8E78D31B1FEFCFF000427BD0 /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E78D31A1FEFCFF000427BD0 /* CategoryTableViewCell.xib */; };
+		8EB1AE2A1FF286AD009CDB1B /* ArticleServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB1AE291FF286AD009CDB1B /* ArticleServiceProtocol.swift */; };
+		8EB1AE2C1FF286B9009CDB1B /* ArticleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB1AE2B1FF286B9009CDB1B /* ArticleService.swift */; };
+		8EB1AE2F1FF28B7E009CDB1B /* ArticlePresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB1AE2E1FF28B7E009CDB1B /* ArticlePresenterProtocol.swift */; };
+		8EB1AE311FF28BFD009CDB1B /* ArticlePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB1AE301FF28BFD009CDB1B /* ArticlePresenter.swift */; };
 		8EF651021FF1335F004D1888 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF651011FF1335F004D1888 /* DetailViewController.swift */; };
 		BDD66B775BA10ACBBD40679D /* Pods_Thong_Vuthy_Homework5.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA6935D01E12293F8EDD47D /* Pods_Thong_Vuthy_Homework5.framework */; };
 /* End PBXBuildFile section */
@@ -40,6 +44,10 @@
 		8E78D30F1FEF5FD800427BD0 /* HomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCell.xib; sourceTree = "<group>"; };
 		8E78D3181FEFCFE100427BD0 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		8E78D31A1FEFCFF000427BD0 /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
+		8EB1AE291FF286AD009CDB1B /* ArticleServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleServiceProtocol.swift; sourceTree = "<group>"; };
+		8EB1AE2B1FF286B9009CDB1B /* ArticleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleService.swift; sourceTree = "<group>"; };
+		8EB1AE2E1FF28B7E009CDB1B /* ArticlePresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlePresenterProtocol.swift; sourceTree = "<group>"; };
+		8EB1AE301FF28BFD009CDB1B /* ArticlePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlePresenter.swift; sourceTree = "<group>"; };
 		8EF651011FF1335F004D1888 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		A474D36364B5B2B927C5F830 /* Pods-Thong_Vuthy_Homework5.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thong_Vuthy_Homework5.release.xcconfig"; path = "Pods/Target Support Files/Pods-Thong_Vuthy_Homework5/Pods-Thong_Vuthy_Homework5.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -102,6 +110,8 @@
 		8E4901901FECBDBF003ED4EA /* Thong_Vuthy_Homework5 */ = {
 			isa = PBXGroup;
 			children = (
+				8EB1AE2D1FF2870C009CDB1B /* Persenter */,
+				8EB1AE281FF28693009CDB1B /* Service */,
 				5A51691E1FF24758005B2E76 /* Model */,
 				8E78D2FB1FEF5DE100427BD0 /* Views */,
 				8E4901911FECBDBF003ED4EA /* AppDelegate.swift */,
@@ -133,6 +143,24 @@
 				8E78D30F1FEF5FD800427BD0 /* HomeCell.xib */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		8EB1AE281FF28693009CDB1B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				8EB1AE291FF286AD009CDB1B /* ArticleServiceProtocol.swift */,
+				8EB1AE2B1FF286B9009CDB1B /* ArticleService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		8EB1AE2D1FF2870C009CDB1B /* Persenter */ = {
+			isa = PBXGroup;
+			children = (
+				8EB1AE2E1FF28B7E009CDB1B /* ArticlePresenterProtocol.swift */,
+				8EB1AE301FF28BFD009CDB1B /* ArticlePresenter.swift */,
+			);
+			path = Persenter;
 			sourceTree = "<group>";
 		};
 		C1FE138D4F2E9A0E6A4E69A3 /* Pods */ = {
@@ -279,12 +307,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EB1AE2C1FF286B9009CDB1B /* ArticleService.swift in Sources */,
+				8EB1AE2F1FF28B7E009CDB1B /* ArticlePresenterProtocol.swift in Sources */,
 				8E3785501FF09E57007E010C /* CollectionViewTableViewCell.swift in Sources */,
 				8E78D3191FEFCFE100427BD0 /* CategoryTableViewCell.swift in Sources */,
 				8E3785541FF09F83007E010C /* HeadLineCollectionViewCell.swift in Sources */,
+				8EB1AE2A1FF286AD009CDB1B /* ArticleServiceProtocol.swift in Sources */,
 				8E4901941FECBDBF003ED4EA /* ViewController.swift in Sources */,
 				5A5169201FF24771005B2E76 /* Article.swift in Sources */,
 				8E78D3101FEF5FD800427BD0 /* HomeCell.swift in Sources */,
+				8EB1AE311FF28BFD009CDB1B /* ArticlePresenter.swift in Sources */,
 				8E4901921FECBDBF003ED4EA /* AppDelegate.swift in Sources */,
 				8EF651021FF1335F004D1888 /* DetailViewController.swift in Sources */,
 			);

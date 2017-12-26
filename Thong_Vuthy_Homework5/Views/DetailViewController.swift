@@ -16,9 +16,13 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var numberOfViews: UILabel!
     @IBOutlet weak var textArticle: UITextView!
     
+    var article : Article?
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        titleHeadline.text = article?.title
+        datePublished.text = article?.createdDate
+        textArticle.text = article?.desc
         // Do any additional setup after loading the view.
     }
 
