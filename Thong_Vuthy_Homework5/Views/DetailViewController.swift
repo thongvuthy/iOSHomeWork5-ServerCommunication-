@@ -10,6 +10,12 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
+    @IBOutlet weak var imageHeadline: UIImageView!
+    @IBOutlet weak var titleHeadline: UILabel!
+    @IBOutlet weak var datePublished: UILabel!
+    @IBOutlet weak var numberOfViews: UILabel!
+    @IBOutlet weak var textArticle: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,14 +28,6 @@ class DetailViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
