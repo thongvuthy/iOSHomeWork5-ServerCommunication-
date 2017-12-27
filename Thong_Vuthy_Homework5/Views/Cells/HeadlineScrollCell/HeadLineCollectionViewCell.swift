@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Kingfisher
 class HeadLineCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var imageHeadline: UIImageView!
@@ -16,10 +16,9 @@ class HeadLineCollectionViewCell: UICollectionViewCell {
     
     func configureCell(imageString : String?, labelHeadline : String?) {
         self.labelHeadline.text = labelHeadline
-        let url = URL(string: (imageString ?? "image")!)
-        let data = try? Data(contentsOf: url!)
-        if let datax = data {
-            self.imageHeadline.image = UIImage(data:datax)
+        if let string = imageString {
+        let url = URL(string: string)
+           imageHeadline.kf.setImage(with: url)
         }
     }
 }

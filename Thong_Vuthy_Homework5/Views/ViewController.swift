@@ -8,9 +8,10 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtocol,  UITableViewDataSource, UITableViewDelegate  {
+class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtocol,  UITableViewDataSource, UITableViewDelegate   {
  
 
+    
     var articlePresentor : ArticlePresenter?
     
     var articles : [Article]?
@@ -28,6 +29,7 @@ class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtoc
     
     @IBOutlet weak var sourceTabBar: UITabBarItem!
     var currentArticle : Article?
+    var uploadController = false
     
     private let refreshControl = UIRefreshControl()
     let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
@@ -36,7 +38,10 @@ class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtoc
     var page = 1
     
     override func viewDidLoad() {
+    
+        
         super.viewDidLoad()
+        
                 self.navigationItem.title = "Home"
            self.navigationController?.navigationBar.barTintColor = UIColor.red
         self.navigationController?.navigationBar.tintColor = UIColor.white
@@ -82,7 +87,7 @@ class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtoc
         } else {
             tableView.addSubview(refreshControl)
         }
-        refreshControl.addTarget(self, action: #selector(refreshWeatherData(_:)), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(refreshTableData(_:)), for: .valueChanged)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -109,6 +114,7 @@ class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtoc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         currentArticle = articles![indexPath.row - 1 ]
+        uploadController = false
         performSegue(withIdentifier: "articledetailseque", sender: self)
     }
     
@@ -162,7 +168,7 @@ class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtoc
     
     
     
-    @objc private func refreshWeatherData(_ sender: Any) {
+    @objc private func refreshTableData(_ sender: Any) {
         // Fetch Weather Data
         refreshArticle()
     }
@@ -175,8 +181,10 @@ class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtoc
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if !uploadController {
         let controller = segue.destination as! DetailViewController
         controller.article = currentArticle
+      }
     }
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
@@ -221,7 +229,8 @@ class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtoc
     
     
     @objc func addButtonItemClicked() {
-        print("Add button tapped")
+        uploadController = true
+        performSegue(withIdentifier: "uploadseque", sender: self) 
     }
     
     
