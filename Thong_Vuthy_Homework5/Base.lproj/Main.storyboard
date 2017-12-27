@@ -152,8 +152,8 @@
                                     <constraint firstAttribute="height" constant="160" id="np4-TR-7Dc"/>
                                 </constraints>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9w2-WL-NFf">
-                                <rect key="frame" x="8" y="239" width="375" height="328"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="9w2-WL-NFf">
+                                <rect key="frame" x="8" y="239" width="359" height="328"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">사용한 영수증은 회사에 보내세요. 
 보낸 영수증은 회사담당자가 PC에서 획인할 수 있어요. 
@@ -223,12 +223,12 @@
                             <constraint firstItem="9w2-WL-NFf" firstAttribute="bottom" secondItem="rlA-jk-bvP" secondAttribute="bottom" constant="8" id="6Os-Dh-w15"/>
                             <constraint firstItem="8Rp-8I-DXl" firstAttribute="leading" secondItem="rlA-jk-bvP" secondAttribute="leading" constant="8" id="7ex-RF-xzN"/>
                             <constraint firstItem="rlA-jk-bvP" firstAttribute="trailing" secondItem="8Rp-8I-DXl" secondAttribute="trailing" constant="8" id="8Za-QM-0Eb"/>
+                            <constraint firstAttribute="trailing" secondItem="9w2-WL-NFf" secondAttribute="trailing" constant="8" id="ERG-eT-3iQ"/>
                             <constraint firstItem="trX-Fr-oPy" firstAttribute="leading" secondItem="rlA-jk-bvP" secondAttribute="leading" id="ETx-S1-Fd3"/>
                             <constraint firstItem="9w2-WL-NFf" firstAttribute="leading" secondItem="rlA-jk-bvP" secondAttribute="leading" constant="8" id="F36-sM-hgM"/>
                             <constraint firstItem="EOR-eG-1Ou" firstAttribute="top" secondItem="8Rp-8I-DXl" secondAttribute="bottom" constant="10" id="OkG-cn-nMx"/>
                             <constraint firstItem="trX-Fr-oPy" firstAttribute="trailing" secondItem="rlA-jk-bvP" secondAttribute="trailing" id="SsW-83-H7k"/>
                             <constraint firstItem="A9f-ca-nrR" firstAttribute="trailing" secondItem="rlA-jk-bvP" secondAttribute="trailing" id="eCo-21-oni"/>
-                            <constraint firstItem="9w2-WL-NFf" firstAttribute="trailing" secondItem="rlA-jk-bvP" secondAttribute="trailing" constant="8" id="eZf-tL-etY"/>
                             <constraint firstItem="rlA-jk-bvP" firstAttribute="bottom" secondItem="trX-Fr-oPy" secondAttribute="bottom" constant="8" id="jUH-a0-Xb5"/>
                             <constraint firstItem="EOR-eG-1Ou" firstAttribute="leading" secondItem="rlA-jk-bvP" secondAttribute="leading" constant="8" id="tnt-ko-YNc"/>
                             <constraint firstItem="9w2-WL-NFf" firstAttribute="top" secondItem="EOR-eG-1Ou" secondAttribute="top" constant="20" id="yQ8-hX-wSE"/>

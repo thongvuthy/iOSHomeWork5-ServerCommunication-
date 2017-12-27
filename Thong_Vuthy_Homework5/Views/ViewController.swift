@@ -29,6 +29,7 @@ class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtoc
     @IBOutlet weak var sourceTabBar: UITabBarItem!
     var currentArticle : Article?
     
+    private let refreshControl = UIRefreshControl()
     
     var currunTab : String!
     
@@ -68,6 +69,13 @@ class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtoc
         self.articlePresentor?.delegate = self
         self.articlePresentor?.getArticles(page: 1, limit: 15)
        
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = refreshControl
+        } else {
+            tableView.addSubview(refreshControl)
+        }
+        refreshControl.addTarget(self, action: #selector(refreshWeatherData(_:)), for: .valueChanged)
+        
         tableView.delegate = self
         tableView.dataSource = self
 
@@ -76,7 +84,7 @@ class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtoc
     
     
     func didResponseArticle(article: [Article]) {
-        self.articles? = article
+        self.articles! += article
         
         self.tableView.reloadData()
         print(article.count)
@@ -131,12 +139,30 @@ class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtoc
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
         if ((tableView.contentOffset.y + tableView.frame.size.height) >= tableView.contentSize.height)
         {
         print("scrolling reaches last!")
-          //  articlePresentor?.getArticles(page: 2, limit: 15)
+            articlePresentor?.getArticles(page: 2, limit: 15)
             
+            let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+            spinner.color = UIColor.darkGray
+            spinner.hidesWhenStopped = true
+            tableView.tableFooterView = spinner
+            spinner.startAnimating() 
         }
+    }
+    
+    
+    
+    @objc private func refreshWeatherData(_ sender: Any) {
+        // Fetch Weather Data
+        fetchWeatherData()
+    }
+    
+    private func fetchWeatherData() {
+                self.refreshControl.endRefreshing()
+               // self.activityIndicatorView.stopAnimating()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -169,7 +195,7 @@ class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtoc
             UIView.animate(withDuration: 0.5){
                 self.anotherRedRetangar.frame.origin.x = self.tabBar.frame.origin.x + self.tabBar.frame.width/3
             }
-        }else {
+        } else {
             
             UIView.transition(with: self.tableView, duration: 0.5, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {
                 
