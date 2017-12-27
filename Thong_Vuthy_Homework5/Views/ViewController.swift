@@ -76,7 +76,8 @@ class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtoc
     
     
     func didResponseArticle(article: [Article]) {
-        self.articles = article
+        self.articles? = article
+        
         self.tableView.reloadData()
         print(article.count)
     }
@@ -96,7 +97,6 @@ class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtoc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(articles!.count)
         return (articles?.count)! + 1
     }
     
@@ -104,15 +104,21 @@ class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtoc
         
         if(currunTab == "Home") {
             if indexPath.row == 0 {
-                
-                let cell = tableView.dequeueReusableCell(withIdentifier: "collectionviewtableviewecell") as! CollectionViewTableViewCell 
-                return cell
+                if  articles!.count > 1  {
+                    CollectionViewTableViewCell.dataForCell = articles
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "collectionviewtableviewecell") as! CollectionViewTableViewCell
+                    return cell
+                }
             }
+                
             else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "homecell") as! HomeCell
-                print(articles![indexPath.row - 1])
-                cell.configureCell(article: articles![indexPath.row - 1])
-                return cell
+                
+                   print("is article for cell nil \(articles![indexPath.row - 1])")
+                
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "homecell") as! HomeCell
+                    cell.configureCell(article: articles![indexPath.row - 1])
+                    return cell
+  
             }
             
         } else if(currunTab == "Category") {
@@ -123,7 +129,15 @@ class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtoc
         return UITableViewCell()
        
     }
-
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if ((tableView.contentOffset.y + tableView.frame.size.height) >= tableView.contentSize.height)
+        {
+        print("scrolling reaches last!")
+          //  articlePresentor?.getArticles(page: 2, limit: 15)
+            
+        }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let controller = segue.destination as! DetailViewController

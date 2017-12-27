@@ -19,7 +19,15 @@ class DetailViewController: UIViewController {
     var article : Article?
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        if let string = article?.image {
+            let url = URL(string: string)
+            let data = try? Data(contentsOf: url!)
+            imageHeadline.image = UIImage(data: data!)
+        }
+        
+        numberOfViews.text = "23455 Views"
+       
         titleHeadline.text = article?.title
         datePublished.text = article?.createdDate
         textArticle.text = article?.desc

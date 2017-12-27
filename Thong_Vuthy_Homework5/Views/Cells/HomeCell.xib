@@ -28,9 +28,8 @@
                             <constraint firstAttribute="height" constant="102.5" id="xUh-SZ-GGf"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hyo-1w-80B">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="date" translatesAutoresizingMaskIntoConstraints="NO" id="hyo-1w-80B">
                         <rect key="frame" x="170" y="53" width="25" height="25"/>
-                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="PLm-Hn-bhw"/>
@@ -43,7 +42,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rW3-iF-JQI">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="view" translatesAutoresizingMaskIntoConstraints="NO" id="rW3-iF-JQI">
                         <rect key="frame" x="170" y="83" width="25" height="25"/>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -65,9 +64,12 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7iu-ec-LlO">
                         <rect key="frame" x="369" y="81" width="32" height="29"/>
-                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <state key="normal" title="Save"/>
+                        <state key="normal" title="Save">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="titleShadowColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
                     </button>
                 </subviews>
                 <constraints>
@@ -95,6 +97,7 @@
                 <outlet property="dateImage" destination="hyo-1w-80B" id="iYd-de-fTz"/>
                 <outlet property="dateText" destination="875-h9-oJz" id="Heb-f8-94q"/>
                 <outlet property="headline" destination="Frd-hf-hb3" id="qxZ-xO-y5Q"/>
+                <outlet property="saveButton" destination="7iu-ec-LlO" id="Uih-2t-B2V"/>
                 <outlet property="thumnail" destination="PMl-w9-dCp" id="kqY-DO-vFY"/>
                 <outlet property="viewImage" destination="rW3-iF-JQI" id="tC1-pT-JTl"/>
                 <outlet property="viewText" destination="AEl-9x-ng7" id="28R-rn-TXs"/>
@@ -103,6 +106,8 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="date" width="512" height="512"/>
         <image name="developer" width="292" height="172"/>
+        <image name="view" width="225" height="225"/>
     </resources>
 </document>

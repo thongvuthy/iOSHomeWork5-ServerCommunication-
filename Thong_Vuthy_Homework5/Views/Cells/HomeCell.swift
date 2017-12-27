@@ -18,9 +18,13 @@ class HomeCell: UITableViewCell {
     
     @IBOutlet weak var dateImage: UIImageView!
     
+    @IBOutlet weak var saveButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        saveButton.layer.cornerRadius = 5.0
+        saveButton.layer.borderColor = UIColor.darkGray.cgColor
+        saveButton.layer.borderWidth =  1.0
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -31,12 +35,12 @@ class HomeCell: UITableViewCell {
     }
     
     func configureCell(article : Article){
-        print("works")
-        
-         let url = URL(string: article.image!)
-        let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-        //
+
+        if let string = article.image {
+        let url = URL(string: string)
+        let data = try? Data(contentsOf: url!)
         self.thumnail.image = UIImage(data:data!)
+    }
     //    self.thumnail.kf.setImage(with: article.image! as? Resource)
         self.headline.text = article.title!
         self.viewText.text = "1335 Views"

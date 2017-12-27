@@ -14,7 +14,12 @@ class HeadLineCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var labelHeadline: UILabel!
     
-    func configureCell() {
-        
+    func configureCell(imageString : String?, labelHeadline : String?) {
+        self.labelHeadline.text = labelHeadline
+        let url = URL(string: (imageString ?? "image")!)
+        let data = try? Data(contentsOf: url!)
+        if let datax = data {
+            self.imageHeadline.image = UIImage(data:datax)
+        }
     }
 }

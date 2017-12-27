@@ -10,13 +10,15 @@ import UIKit
 
 class CollectionViewTableViewCell: UITableViewCell, UICollectionViewDataSource {
     @IBOutlet weak var collectionView: UICollectionView!
-    
+    static var dataForCell : [Article]?
 
     
     override func layoutSubviews() {
+
         collectionView.dataSource = self
         collectionView.showsHorizontalScrollIndicator = true
         collectionView.alwaysBounceHorizontal = true
+        
         let layout = CustomLayout()
         collectionView.collectionViewLayout = layout
         collectionView.isScrollEnabled = true
@@ -33,13 +35,17 @@ class CollectionViewTableViewCell: UITableViewCell, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return (CollectionViewTableViewCell.dataForCell?.count)!
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        
+        print("is collection view nil \(String(describing: CollectionViewTableViewCell.dataForCell?.count))")
+
         let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: "headlinecollectionviewcell", for: indexPath) as!  HeadLineCollectionViewCell
+        
+        cell.configureCell(imageString: CollectionViewTableViewCell.dataForCell![indexPath.row].image, labelHeadline: CollectionViewTableViewCell.dataForCell![indexPath.row].title)
+        
         return cell
     }
   

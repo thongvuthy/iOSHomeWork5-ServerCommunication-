@@ -21,7 +21,7 @@ extension Article: Mappable {
     init?(map: Map) {
 
     }
-
+    
     mutating func mapping(map: Map) {
         title <- map["TITLE"]
         desc <- map["DESCRIPTION"]
