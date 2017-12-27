@@ -8,10 +8,13 @@
 
 import UIKit
 
-class CollectionViewTableViewCell: UITableViewCell, UICollectionViewDataSource {
-    @IBOutlet weak var collectionView: UICollectionView!
-    static var dataForCell : [Article]?
+class CollectionViewTableViewCell: UITableViewCell, UICollectionViewDataSource, ArticlePresenterProtocol {
+    
 
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    var dataForCell : [Article]?
+    var articlePresentor : ArticlePresenter?
     
     override func layoutSubviews() {
 
@@ -23,10 +26,21 @@ class CollectionViewTableViewCell: UITableViewCell, UICollectionViewDataSource {
         collectionView.collectionViewLayout = layout
         collectionView.isScrollEnabled = true
         collectionView.isDirectionalLockEnabled = true
+        articlePresentor = ArticlePresenter()
+        articlePresentor?.getArticles(page: 1, limit: 5)
+        self.articlePresentor?.delegate = self
         
         
     }
     
+    func didResponseArticle(article: [Article]) {
+        dataForCell = article
+        collectionView.reloadData()
+    }
+    
+    func didResponseMsg(msg: String) {
+        print("Coll Cell \(msg)")
+    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -35,16 +49,16 @@ class CollectionViewTableViewCell: UITableViewCell, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (CollectionViewTableViewCell.dataForCell?.count)!
+        return (dataForCell?.count ?? 0) 
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        print("is collection view nil \(String(describing: CollectionViewTableViewCell.dataForCell?.count))")
+        print("is collection view nil \(String(describing: dataForCell?.count))")
 
         let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: "headlinecollectionviewcell", for: indexPath) as!  HeadLineCollectionViewCell
         
-        cell.configureCell(imageString: CollectionViewTableViewCell.dataForCell![indexPath.row].image, labelHeadline: CollectionViewTableViewCell.dataForCell![indexPath.row].title)
+        cell.configureCell(imageString: dataForCell![indexPath.row].image, labelHeadline: dataForCell![indexPath.row].title)
         
         return cell
     }

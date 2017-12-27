@@ -37,9 +37,11 @@ class HomeCell: UITableViewCell {
     func configureCell(article : Article){
 
         if let string = article.image {
-        let url = URL(string: string)
-        let data = try? Data(contentsOf: url!)
-        self.thumnail.image = UIImage(data:data!)
+//        let url = URL(string: string)
+//        let data = try? Data(contentsOf: url!)
+    
+            self.thumnail.kf.setImage(with: URL(string: string))
+
     }
     //    self.thumnail.kf.setImage(with: article.image! as? Resource)
         self.headline.text = article.title!

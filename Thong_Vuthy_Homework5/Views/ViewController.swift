@@ -30,8 +30,10 @@ class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtoc
     var currentArticle : Article?
     
     private let refreshControl = UIRefreshControl()
+    let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
     var currunTab : String!
+    var page = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +48,8 @@ class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtoc
         let attributeBar   = [NSAttributedStringKey.foregroundColor : UIColor(named: "White")]
         appearanceBar.titleTextAttributes = attributeBar
             
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target: self, action: nil)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: nil)
+        self.navigationItem.rightBarButtonItem?.action = #selector(addButtonItemClicked)
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
         // Do any additional setup after loading the view, typically from a nib.
         tabBar.delegate = self
@@ -67,8 +70,13 @@ class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtoc
         articles = [Article]()
         self.articlePresentor = ArticlePresenter()
         self.articlePresentor?.delegate = self
-        self.articlePresentor?.getArticles(page: 1, limit: 15)
+        self.articlePresentor?.getArticles(page: page, limit: 10)
        
+        
+       
+        spinner.color = UIColor.darkGray
+        spinner.hidesWhenStopped = true
+        tableView.tableFooterView = spinner
         if #available(iOS 10.0, *) {
             tableView.refreshControl = refreshControl
         } else {
@@ -85,8 +93,8 @@ class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtoc
     
     func didResponseArticle(article: [Article]) {
         self.articles! += article
-        
         self.tableView.reloadData()
+        self.spinner.stopAnimating()
         print(article.count)
     }
     
@@ -112,18 +120,16 @@ class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtoc
         
         if(currunTab == "Home") {
             if indexPath.row == 0 {
+                print("collection view")
                 if  articles!.count > 1  {
-                    CollectionViewTableViewCell.dataForCell = articles
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "collectionviewtableviewecell") as! CollectionViewTableViewCell
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "collectionviewtableviewecell", for: indexPath) as! CollectionViewTableViewCell
                     return cell
                 }
             }
                 
             else {
-                
-                   print("is article for cell nil \(articles![indexPath.row - 1])")
-                
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "homecell") as! HomeCell
+                    print("homecell view")
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "homecell", for: indexPath) as! HomeCell
                     cell.configureCell(article: articles![indexPath.row - 1])
                     return cell
   
@@ -143,13 +149,14 @@ class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtoc
         if ((tableView.contentOffset.y + tableView.frame.size.height) >= tableView.contentSize.height)
         {
         print("scrolling reaches last!")
-            articlePresentor?.getArticles(page: 2, limit: 15)
             
-            let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-            spinner.color = UIColor.darkGray
-            spinner.hidesWhenStopped = true
-            tableView.tableFooterView = spinner
-            spinner.startAnimating() 
+            page = page + 1
+            articlePresentor?.getArticles(page: page, limit: 10)
+            
+            spinner.startAnimating()
+           
+            
+           
         }
     }
     
@@ -157,11 +164,13 @@ class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtoc
     
     @objc private func refreshWeatherData(_ sender: Any) {
         // Fetch Weather Data
-        fetchWeatherData()
+        refreshArticle()
     }
     
-    private func fetchWeatherData() {
-                self.refreshControl.endRefreshing()
+    private func  refreshArticle() {
+        page = 1
+        articlePresentor?.getArticles(page: page, limit: 10)
+        self.refreshControl.endRefreshing()
                // self.activityIndicatorView.stopAnimating()
     }
     
@@ -210,6 +219,10 @@ class ViewController: UIViewController, UITabBarDelegate, ArticlePresenterProtoc
         }
     }
     
+    
+    @objc func addButtonItemClicked() {
+        print("Add button tapped")
+    }
     
     
     func cofigureTabBar() {
